@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register - Student Task Manager</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/responsive.css" />
+  </head>
+  <body>
+    <div class="auth-page">
+      <div class="auth-card">
+        <h1>Create Account</h1>
+        <p>Start organizing your school life.</p>
+        <form class="auth-form" id="registerForm">
+          <label>
+            Full Name
+            <input type="text" placeholder="Ava Johnson" required />
+          </label>
+          <label>
+            Email
+            <input type="email" placeholder="student@example.com" required />
+          </label>
+          <label>
+            Password
+            <input type="password" placeholder="••••••••" required />
+          </label>
+          <button class="btn btn-primary full-width" type="submit">Register</button>
+        </form>
+        <p class="auth-link">Already have an account? <a href="login.html">Login</a></p>
+      </div>
+    </div>
+
+    <script src="js/storage.js"></script>
+    <script src="js/auth.js"></script>
+  </body>
+</html>

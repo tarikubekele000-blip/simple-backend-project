@@ -1,0 +1,113 @@
+:root {
+  color-scheme: light;
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  color: #111827;
+  background: #f4f7fb;
+}
+
+body[data-theme='dark'] {
+  color: #f9fafb;
+  background: #111827;
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; min-height: 100vh; }
+a { color: inherit; text-decoration: none; }
+button, input, select, textarea { font: inherit; }
+
+#root { min-height: 100vh; }
+
+.app-shell { display: grid; grid-template-columns: 280px 1fr; min-height: 100vh; }
+.sidebar { padding: 24px; background: linear-gradient(135deg, #6d28d9, #4f46e5); color: white; }
+.brand { display: flex; align-items: center; gap: 10px; font-size: 1.2rem; font-weight: 700; margin-bottom: 24px; }
+.brand-mark { display: inline-flex; align-items: center; justify-content: center; width: 34px; height: 34px; border-radius: 10px; background: rgba(255,255,255,0.18); }
+.sidebar-nav { display: flex; flex-direction: column; gap: 8px; }
+.sidebar-nav a { padding: 10px 12px; border-radius: 10px; transition: background 0.2s ease; }
+.sidebar-nav a.active, .sidebar-nav a:hover { background: rgba(255,255,255,0.15); }
+.sidebar-card, .card-panel, .hero-card, .auth-panel, .profile-card, .detail-box { background: white; color: #111827; border-radius: 20px; padding: 20px; box-shadow: 0 12px 40px rgba(15, 23, 42, 0.08); }
+body[data-theme='dark'] .sidebar-card, body[data-theme='dark'] .card-panel, body[data-theme='dark'] .hero-card, body[data-theme='dark'] .auth-panel, body[data-theme='dark'] .profile-card, body[data-theme='dark'] .detail-box { background: #1f2937; color: #f9fafb; }
+.progress-overview { display: flex; flex-direction: column; gap: 14px; }
+.progress-summary { display: flex; gap: 12px; flex-wrap: wrap; }
+.progress-pill { flex: 1; min-width: 140px; border-radius: 14px; padding: 12px 14px; background: linear-gradient(135deg, #ede9fe, #f5f3ff); display: flex; justify-content: space-between; align-items: center; }
+body[data-theme='dark'] .progress-pill { background: #374151; }
+.progress-bar-card { border: 1px solid #e5e7eb; border-radius: 16px; padding: 12px 14px; }
+body[data-theme='dark'] .progress-bar-card { border-color: #4b5563; }
+.progress-topline { display: flex; justify-content: space-between; gap: 8px; margin-bottom: 8px; font-size: 0.95rem; }
+.progress-bar { height: 10px; border-radius: 999px; background: #e5e7eb; overflow: hidden; }
+.progress-fill { height: 100%; background: linear-gradient(90deg, #7c3aed, #10b981); border-radius: inherit; }
+.feedback-text { margin: 0; color: #4338ca; font-weight: 600; }
+.achievement-list { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+.achievement-badge { display: flex; gap: 10px; align-items: flex-start; border: 1px solid #e5e7eb; border-radius: 14px; padding: 10px; background: #f9fafb; }
+.achievement-badge.earned { border-color: #a78bfa; background: #f5f3ff; }
+body[data-theme='dark'] .achievement-badge { background: #111827; border-color: #374151; }
+body[data-theme='dark'] .achievement-badge.earned { background: #312e81; }
+.achievement-icon { width: 30px; height: 30px; border-radius: 999px; display: grid; place-items: center; background: #e0e7ff; color: #4338ca; font-weight: 700; }
+.achievement-badge h4 { margin: 0 0 2px; font-size: 0.95rem; }
+.achievement-badge p { margin: 0; font-size: 0.8rem; color: #6b7280; }
+@media (max-width: 900px) {
+  .achievement-list { grid-template-columns: 1fr; }
+}
+.main-panel { padding: 24px; display: flex; flex-direction: column; gap: 20px; }
+.topbar { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+.topbar-actions, .button-row, .task-actions { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+.action-btn, .ghost-btn, .icon-btn { border: none; cursor: pointer; border-radius: 999px; padding: 10px 14px; }
+.action-btn { background: linear-gradient(135deg, #7c3aed, #4f46e5); color: white; }
+.ghost-btn { background: #eef2ff; color: #4338ca; }
+body[data-theme='dark'] .ghost-btn { background: #374151; color: #e0e7ff; }
+.icon-btn { background: #e5e7eb; }
+body[data-theme='dark'] .icon-btn { background: #374151; }
+.eyebrow { text-transform: uppercase; letter-spacing: 0.24em; font-size: 0.72rem; color: #7c3aed; font-weight: 700; margin: 0 0 6px; }
+.stats-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.stat-card { border-radius: 18px; padding: 18px; color: white; }
+.stat-card h3 { margin: 2px 0; font-size: 1.6rem; }
+.accent-purple { background: linear-gradient(135deg, #7c3aed, #8b5cf6); }
+.accent-blue { background: linear-gradient(135deg, #2563eb, #3b82f6); }
+.accent-green { background: linear-gradient(135deg, #059669, #10b981); }
+.toolbar { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 12px; }
+.toolbar input, .toolbar select, .form-panel input, .form-panel select, .form-panel textarea { width: 100%; border: 1px solid #d1d5db; border-radius: 12px; padding: 10px 12px; background: white; }
+body[data-theme='dark'] .toolbar input, body[data-theme='dark'] .toolbar select, body[data-theme='dark'] .form-panel input, body[data-theme='dark'] .form-panel select, body[data-theme='dark'] .form-panel textarea { background: #111827; color: #f9fafb; border-color: #4b5563; }
+.tasks-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.task-card { border: 1px solid #e5e7eb; border-radius: 16px; padding: 16px; background: #f9fafb; }
+body[data-theme='dark'] .task-card { background: #111827; border-color: #374151; }
+.task-card-header, .task-meta, .section-header { display: flex; justify-content: space-between; align-items: center; gap: 8px; flex-wrap: wrap; }
+.pill { display: inline-block; padding: 6px 10px; border-radius: 999px; font-size: 0.8rem; }
+.priority-low { background: #dcfce7; color: #166534; }
+.priority-medium { background: #fef3c7; color: #92400e; }
+.priority-high { background: #fee2e2; color: #991b1b; }
+.status-pending { background: #ede9fe; color: #5b21b6; }
+.status-progress { background: #dbeafe; color: #1d4ed8; }
+.status-completed { background: #dcfce7; color: #166534; }
+.form-panel { display: flex; flex-direction: column; gap: 12px; }
+.form-row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+label { display: flex; flex-direction: column; gap: 6px; font-weight: 600; }
+.error-text { color: #dc2626; font-size: 0.85rem; }
+.helper-text { color: #6b7280; }
+.empty-state { padding: 24px; text-align: center; color: #6b7280; }
+.modal-backdrop { position: fixed; inset: 0; background: rgba(15, 23, 42, 0.55); display: grid; place-items: center; padding: 18px; }
+.modal-card { width: min(560px, 100%); border-radius: 18px; background: white; padding: 20px; }
+body[data-theme='dark'] .modal-card { background: #1f2937; color: #f9fafb; }
+.modal-header { display: flex; justify-content: space-between; align-items: center; }
+.toast { position: fixed; right: 20px; bottom: 20px; background: #111827; color: white; padding: 12px 16px; border-radius: 999px; }
+.calendar-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+.calendar-card { border: 1px solid #e5e7eb; border-radius: 14px; padding: 14px; }
+body[data-theme='dark'] .calendar-card { border-color: #374151; }
+.landing-page, .auth-card { min-height: 100vh; display: grid; place-items: center; padding: 24px; }
+.hero-card { max-width: 720px; }
+.auth-panel { width: min(460px, 100%); }
+.not-found { text-align: center; }
+.small { padding: 8px 12px; font-size: 0.9rem; }
+.danger { background: #fee2e2; color: #b91c1c; }
+body[data-theme='dark'] .danger { background: #7f1d1d; color: #fee2e2; }
+@media (max-width: 900px) {
+  .app-shell { grid-template-columns: 1fr; }
+  .sidebar { order: 2; }
+  .main-panel { order: 1; }
+  .stats-grid, .tasks-grid, .calendar-grid, .form-row { grid-template-columns: 1fr; }
+}
+@media (max-width: 640px) {
+  .main-panel { padding: 16px; }
+  .topbar { flex-direction: column; align-items: flex-start; }
+  .toolbar { flex-direction: column; }
+}

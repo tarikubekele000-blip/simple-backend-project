@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Settings - Student Task Manager</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/responsive.css" />
+  </head>
+  <body>
+    <div class="app-layout">
+      <aside class="sidebar">
+        <div class="brand sidebar-brand">
+          <span class="brand-mark">✓</span>
+          <span>TaskFlow</span>
+        </div>
+        <nav class="sidebar-nav">
+          <a href="dashboard.html">Dashboard</a>
+          <a href="tasks.html">My Tasks</a>
+          <a href="profile.html">Profile</a>
+          <a class="active" href="settings.html">Settings</a>
+        </nav>
+        <a class="btn btn-secondary full-width" href="index.html">Logout</a>
+      </aside>
+
+      <main class="main-content">
+        <header class="content-header">
+          <div>
+            <p class="eyebrow">Settings</p>
+            <h1>Customize your workspace</h1>
+          </div>
+          <div class="header-actions">
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle color theme">☀️</button>
+          </div>
+        </header>
+
+        <section class="card settings-card">
+          <h2>Preferences</h2>
+          <div class="setting-row">
+            <div>
+              <strong>Dark Mode</strong>
+              <p>Switch between light and dark themes.</p>
+            </div>
+            <label class="toggle">
+              <input type="checkbox" id="darkModeToggle" />
+              <span></span>
+            </label>
+          </div>
+          <div class="setting-row">
+            <div>
+              <strong>Notifications</strong>
+              <p>Get reminders for deadlines approaching.</p>
+            </div>
+            <label class="toggle">
+              <input type="checkbox" checked />
+              <span></span>
+            </label>
+          </div>
+          <div class="setting-row">
+            <div>
+              <strong>Language</strong>
+              <p>Select your preferred learning interface language.</p>
+            </div>
+            <select>
+              <option>English</option>
+              <option>Spanish</option>
+              <option>French</option>
+            </select>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="js/storage.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/profile.js"></script>
+  </body>
+</html>
