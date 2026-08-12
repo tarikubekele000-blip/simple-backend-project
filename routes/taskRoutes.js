@@ -1,14 +1,14 @@
 const express = require('express')
-const Task = require('../models/Task')
 const auth = require('../middleware/authMiddleware')
+const fallbackStore = require('../utils/fallbackStore')
 
 const router = express.Router()
 router.use(auth)
 
 router.get('/', async (req, res) => {
   try {
-    const tasks = await Task.find({ user: req.user.id }).sort({ dueDate: 1 }).lean()
-    res.json(tasks.map((task) => ({ ...task, id: task._id.toString() })))
+    const tasks = fallbackStore.listTasksForUser(req.user.id)
+    res.json(tasks)
   } catch (error) {
     console.error(error)
     res.status(500).json({ message: 'Unable to load tasks' })
@@ -17,11 +17,11 @@ router.get('/', async (req, res) => {
 
 router.get('/:id', async (req, res) => {
   try {
-    const task = await Task.findOne({ _id: req.params.id, user: req.user.id }).lean()
+    const task = fallbackStore.getTaskById(req.params.id, req.user.id)
     if (!task) {
       return res.status(404).json({ message: 'Task not found' })
     }
-    res.json({ ...task, id: task._id.toString() })
+    res.json(task)
   } catch (error) {
     console.error(error)
     res.status(500).json({ message: 'Unable to load task' })
@@ -30,13 +30,11 @@ router.get('/:id', async (req, res) => {
 
 router.post('/', async (req, res) => {
   try {
-    const task = await Task.create({
+    const task = fallbackStore.createTask({
       ...req.body,
       user: req.user.id,
     })
-    const createdTask = task.toObject()
-    createdTask.id = createdTask._id.toString()
-    res.status(201).json(createdTask)
+    res.status(201).json(task)
   } catch (error) {
     console.error(error)
     res.status(500).json({ message: 'Unable to create task' })
@@ -45,17 +43,13 @@ router.post('/', async (req, res) => {
 
 router.put('/:id', async (req, res) => {
   try {
-    const task = await Task.findOneAndUpdate(
-      { _id: req.params.id, user: req.user.id }, 
-      req.body,
-      { new: true, runValidators: true }
-    ).lean()
+    const task = fallbackStore.updateTask(req.params.id, req.user.id, req.body)
 
     if (!task) {
       return res.status(404).json({ message: 'Task not found' })
     }
 
-    res.json({ ...task, id: task._id.toString() })
+    res.json(task)
   } catch (error) {
     console.error(error)
     res.status(500).json({ message: 'Unable to update task' })
@@ -64,7 +58,7 @@ router.put('/:id', async (req, res) => {
 
 router.delete('/:id', async (req, res) => {
   try {
-    const removed = await Task.findOneAndDelete({ _id: req.params.id, user: req.user.id }).lean()
+    const removed = fallbackStore.deleteTask(req.params.id, req.user.id)
     if (!removed) {
       return res.status(404).json({ message: 'Task not found' })
     }

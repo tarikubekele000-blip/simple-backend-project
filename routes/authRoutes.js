@@ -1,9 +1,9 @@
 const express = require('express')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
-const User = require('../models/User')
 const auth = require('../middleware/authMiddleware')
 const { isEmailValid, isPasswordStrong, isNameValid } = require('../utils/backendValidators')
+const fallbackStore = require('../utils/fallbackStore')
 
 const router = express.Router()
 const JWT_SECRET = process.env.JWT_SECRET || 'taskflow-secret'
@@ -29,17 +29,17 @@ router.post('/register', async (req, res) => {
       return res.status(400).json({ message: 'Password must be at least 8 characters and contain letters and numbers' })
     }
 
-    const existingUser = await User.findOne({ email })
+    const existingUser = fallbackStore.findUserByEmail(email)
     if (existingUser) {
       return res.status(409).json({ message: 'Email already in use' })
     }
 
     const hashedPassword = await bcrypt.hash(password, 10)
-    const user = await User.create({ name, email, password: hashedPassword })
+    const user = fallbackStore.createUser({ name, email, password: hashedPassword })
     const token = createToken(user)
 
     res.status(201).json({
-      user: { id: user._id.toString(), name: user.name, email: user.email },
+      user: { id: user.id, name: user.name, email: user.email },
       token,
     })
   } catch (error) {
@@ -59,7 +59,7 @@ router.post('/login', async (req, res) => {
       return res.status(400).json({ message: 'Please enter a valid email address' })
     }
 
-    const user = await User.findOne({ email })
+    const user = fallbackStore.findUserByEmail(email)
     if (!user) {
       return res.status(401).json({ message: 'Invalid credentials' })
     }
@@ -71,7 +71,7 @@ router.post('/login', async (req, res) => {
 
     const token = createToken(user)
     res.json({
-      user: { id: user._id.toString(), name: user.name, email: user.email },
+      user: { id: user.id, name: user.name, email: user.email },
       token,
     })
   } catch (error) {
@@ -87,21 +87,21 @@ router.get('/me', auth, async (req, res) => {
 router.put('/me', auth, async (req, res) => {
   try {
     const { name, email, password } = req.body
-    const user = await User.findById(req.user.id)
-    if (!user) return res.status(404).json({ message: 'User not found' })
+    const existingUser = fallbackStore.getUserById(req.user.id)
+    if (!existingUser) return res.status(404).json({ message: 'User not found' })
 
-    if (email && email !== user.email) {
-      const exists = await User.findOne({ email })
+    if (email && email !== existingUser.email) {
+      const exists = fallbackStore.findUserByEmail(email)
       if (exists) return res.status(409).json({ message: 'Email already in use' })
-      user.email = email
+      existingUser.email = email
     }
 
-    if (name) user.name = name
-    if (password) user.password = await bcrypt.hash(password, 10)
+    if (name) existingUser.name = name
+    if (password) existingUser.password = await bcrypt.hash(password, 10)
 
-    await user.save()
+    const updatedUser = fallbackStore.updateUser(req.user.id, existingUser)
 
-    res.json({ user: { id: user._id.toString(), name: user.name, email: user.email } })
+    res.json({ user: { id: updatedUser.id, name: updatedUser.name, email: updatedUser.email } })
   } catch (error) {
     console.error(error)
     res.status(500).json({ message: 'Failed to update profile' })

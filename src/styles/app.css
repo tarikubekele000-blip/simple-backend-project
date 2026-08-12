@@ -2,22 +2,22 @@
   color-scheme: light;
   font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   line-height: 1.5;
-  font-weight: 400;
+  font-weight: 420;
   color: #111827;
-  background: #f4f7fb;
+  background: hsl(129, 54%, 67%);
 }
 
 body[data-theme='dark'] {
   color: #f9fafb;
-  background: #111827;
+  background: #2b1d05;
 }
 
 * { box-sizing: border-box; }
-body { margin: 0; min-height: 100vh; }
+body { margin: 0; min-height: 80vh }
 a { color: inherit; text-decoration: none; }
 button, input, select, textarea { font: inherit; }
 
-#root { min-height: 100vh; }
+#root { min-height: 90vh; }
 
 .app-shell { display: grid; grid-template-columns: 280px 1fr; min-height: 100vh; }
 .sidebar { padding: 24px; background: linear-gradient(135deg, #6d28d9, #4f46e5); color: white; }
@@ -53,8 +53,8 @@ body[data-theme='dark'] .achievement-badge.earned { background: #312e81; }
 .topbar { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
 .topbar-actions, .button-row, .task-actions { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
 .action-btn, .ghost-btn, .icon-btn { border: none; cursor: pointer; border-radius: 999px; padding: 10px 14px; }
-.action-btn { background: linear-gradient(135deg, #7c3aed, #4f46e5); color: white; }
-.ghost-btn { background: #eef2ff; color: #4338ca; }
+.action-btn { background: linear-gradient(135deg, #3aedd5, #4f46e5); color: white; }
+.ghost-btn { background: #eef2ff; color: #50ca38; }
 body[data-theme='dark'] .ghost-btn { background: #374151; color: #e0e7ff; }
 .icon-btn { background: #e5e7eb; }
 body[data-theme='dark'] .icon-btn { background: #374151; }
@@ -62,7 +62,7 @@ body[data-theme='dark'] .icon-btn { background: #374151; }
 .stats-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
 .stat-card { border-radius: 18px; padding: 18px; color: white; }
 .stat-card h3 { margin: 2px 0; font-size: 1.6rem; }
-.accent-purple { background: linear-gradient(135deg, #7c3aed, #8b5cf6); }
+.accent-purple { background: linear-gradient(135deg, #3aedcf, #5cc5f6); }
 .accent-blue { background: linear-gradient(135deg, #2563eb, #3b82f6); }
 .accent-green { background: linear-gradient(135deg, #059669, #10b981); }
 .toolbar { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 12px; }

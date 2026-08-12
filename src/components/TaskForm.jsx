@@ -75,6 +75,7 @@ const TaskForm = ({ mode = 'add', task, onSubmit, onCancel }) => {
             <option>Low</option>
             <option>Medium</option>
             <option>High</option>
+            <option>urgent </option>
           </select>
         </label>
       </div>
